@@ -2,12 +2,11 @@ package creationalpatterns.users;
 
 public class UserFactoryImpl implements UserFactory{
     @Override
-    public User createUser(String userName, String password, String userType) {
-        return switch (userType.toLowerCase()) {
-            case "admin" -> Admin.getInstance(userName, password);
-            case "creator" -> new Creator(userName, password);
-            case "actor" -> new Actor(userName, password);
-            default -> throw new IllegalArgumentException("Illegal type of user - " + userType);
+    public User createUser(String userName, String password, UserType userType) {
+        return switch (userType) {
+            case ADMIN -> Admin.getInstance(userName, password, this);
+            case CREATOR -> new Creator(userName, password);
+            case ACTOR -> new Actor(userName, password);
         };
     }
 }

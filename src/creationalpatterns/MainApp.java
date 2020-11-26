@@ -4,18 +4,18 @@ import creationalpatterns.users.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 public class MainApp {
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+
     public static void main(String[] args) throws ParseException {
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
 
         UserFactory userFactory = new UserFactoryImpl();
-        Admin admin = (Admin) userFactory.createUser("admin", "1234", "admin");
-        Admin secondAdmin = (Admin) userFactory.createUser("admin2", "12345", "admin");
-        System.out.println(admin.equals(secondAdmin));
+        Admin admin = (Admin) userFactory.createUser("admin", "1234", UserType.ADMIN);
+        Admin secondAdmin = (Admin) userFactory.createUser("admin2", "12345", UserType.ADMIN);
         Creator mom = (Creator) admin.createCreator("Mom", "234");
         Actor dad = (Actor) admin.createActor("Dad", "123");
         Actor son = (Actor) secondAdmin.createActor("Son", "000");

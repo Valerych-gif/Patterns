@@ -10,16 +10,15 @@ public class Admin extends User {
     private static Admin instance;
     UserFactory userFactory;
 
-    private Admin(String userName, String password) {
+    private Admin(String userName, String password, UserFactory userFactory) {
         super(userName, password);
+        this.userFactory=userFactory;
         role = "ADMIN";
-        userFactory = new UserFactoryImpl();
-
     }
 
-    public static Admin getInstance(String userName, String password){
+    public static Admin getInstance(String userName, String password, UserFactory userFactory){
         if (instance == null){
-            instance = new Admin(userName, password);
+            instance = new Admin(userName, password, userFactory);
         }
         return instance;
     }
@@ -30,13 +29,13 @@ public class Admin extends User {
     }
 
     public User createCreator(String userName, String password){
-        User creator = userFactory.createUser(userName, password, "creator");
+        User creator = userFactory.createUser(userName, password, UserType.CREATOR);
         Database.addUser(creator);
         return creator;
     }
 
     public User createActor(String userName, String password){
-        User actor = userFactory.createUser(userName, password, "actor");
+        User actor = userFactory.createUser(userName, password, UserType.ACTOR);
         Database.addUser(actor);
         return actor;
     }
