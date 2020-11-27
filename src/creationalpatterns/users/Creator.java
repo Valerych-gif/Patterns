@@ -7,16 +7,30 @@ import creationalpatterns.Task;
 import java.util.Date;
 import java.util.List;
 
-public class Creator extends User {
+public class Creator implements User {
+
+    private int id;
+    private String userName;
+    private String password;
+    private String role;
+
+    private static int idCounter;
 
     public Creator(String userName, String password) {
-        super(userName, password);
+        this.id = idCounter++;
+        this.userName = userName;
+        this.password = password;
         role = "CREATOR";
     }
 
     @Override
     public List<Task> getAllTasks() {
         return Database.getTasks();
+    }
+
+    @Override
+    public String getRole() {
+        return role;
     }
 
     public Plan createPlan(String title){

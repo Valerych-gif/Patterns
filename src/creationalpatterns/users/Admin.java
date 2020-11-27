@@ -5,13 +5,21 @@ import creationalpatterns.Task;
 
 import java.util.List;
 
-public class Admin extends User {
+public class Admin implements User {
 
     private static Admin instance;
-    UserFactory userFactory;
+    private UserFactory userFactory;
+    private int id;
+    private String userName;
+    private String password;
+    private String role;
+
+    private static int idCounter;
 
     private Admin(String userName, String password, UserFactory userFactory) {
-        super(userName, password);
+        this.id = idCounter++;
+        this.userName = userName;
+        this.password = password;
         this.userFactory=userFactory;
         role = "ADMIN";
     }
@@ -26,6 +34,11 @@ public class Admin extends User {
     @Override
     public List<Task> getAllTasks() {
         return null;
+    }
+
+    @Override
+    public String getRole() {
+        return role;
     }
 
     public User createCreator(String userName, String password){

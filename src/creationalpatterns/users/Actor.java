@@ -6,10 +6,19 @@ import creationalpatterns.Task;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Actor extends User {
+public class Actor implements User {
+
+    private int id;
+    private String userName;
+    private String password;
+    private String role;
+
+    private static int idCounter;
 
     public Actor(String userName, String password) {
-        super(userName, password);
+        this.id = idCounter++;
+        this.userName = userName;
+        this.password = password;
         role = "ACTOR";
     }
 
@@ -20,6 +29,11 @@ public class Actor extends User {
                 .filter(task -> task.getActor().equals(this))
                 .collect(Collectors.toList());
 
+    }
+
+    @Override
+    public String getRole() {
+        return role;
     }
 
     public void sendTaskToApprove(int id){
