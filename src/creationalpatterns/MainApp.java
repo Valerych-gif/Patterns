@@ -30,7 +30,7 @@ public class MainApp {
         System.out.println(roomCleaning);
         System.out.println(Database.getTasks());
         System.out.println("=========================");
-        System.out.println(new UserWithStatistic(dad).getAllTasks());
+        System.out.println(dad.getAllTasks());
         dad.setCompleteness(kitchenCleaning.getId(), 70);
         new UserWithStatistic(dad).showStatistic();
         dad.sendTaskToApprove(kitchenCleaning.getId());
