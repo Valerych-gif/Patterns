@@ -33,6 +33,11 @@ public class Creator implements User {
         return role;
     }
 
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+
     public Plan createPlan(String title){
         Plan plan = new Plan(title);
         Database.addPlan(plan);

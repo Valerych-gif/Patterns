@@ -5,26 +5,25 @@ import creationalpatterns.Task;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class UserWithStatistic implements User {
-
-    User user;
+public class UserWithStatistic extends ImprovedUser {
 
     public UserWithStatistic(User user) {
-        this.user = user;
+        super(user);
     }
 
     @Override
     public List<Task> getAllTasks() {
-        List<Task> tasks = user.getAllTasks();
-        showStatistic(tasks);
-        return tasks;
+        return user.getAllTasks();
     }
 
-    private void showStatistic(List<Task> tasks) {
-        System.out.printf("Quantity of new tasks: %d%nQuantity of tasks in progress: %d%nQuantity of finished tasks %d%nTotal %d%n",
+    public void showStatistic() {
+        List<Task> tasks = getAllTasks();
+        System.out.printf("%nStatistic for %s%nNew tasks: %d%nTasks in progress: %d%nFinished tasks: %d%nApproved tasks: %d%nTotal: %d%n",
+                user.getUserName(),
                 getTasks(tasks, Task.Status.NEW).size(),
                 getTasks(tasks, Task.Status.IN_PROGRESS).size(),
                 getTasks(tasks, Task.Status.FINISHED).size(),
+                getTasks(tasks, Task.Status.APPROVED).size(),
                 tasks.size()
         );
     }
@@ -38,5 +37,10 @@ public class UserWithStatistic implements User {
     @Override
     public String getRole() {
         return null;
+    }
+
+    @Override
+    public String getUserName() {
+        return user.getUserName();
     }
 }

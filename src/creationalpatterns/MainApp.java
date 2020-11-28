@@ -32,11 +32,12 @@ public class MainApp {
         System.out.println("=========================");
         System.out.println(new UserWithStatistic(dad).getAllTasks());
         dad.setCompleteness(kitchenCleaning.getId(), 70);
-        System.out.println(new UserWithStatistic(dad).getAllTasks());
+        new UserWithStatistic(dad).showStatistic();
         dad.sendTaskToApprove(kitchenCleaning.getId());
-        System.out.println(new UserWithStatistic(dad).getAllTasks());
 
         mom.approveTask(kitchenCleaning.getId());
         System.out.println(dad.getAllTasks());
+        new UserWithStatistic(dad).showStatistic();
+        new UserWithStatistic(mom).showStatistic();
     }
 }

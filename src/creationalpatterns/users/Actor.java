@@ -36,6 +36,11 @@ public class Actor implements User {
         return role;
     }
 
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+
     public void sendTaskToApprove(int id){
         List<Task> tasks = getAllTasks();
         for (Task task : tasks) {
