@@ -1,5 +1,7 @@
-package creationalpatterns;
+package creationalpatterns.database;
 
+import creationalpatterns.Plan;
+import creationalpatterns.Task;
 import creationalpatterns.users.User;
 
 import java.util.ArrayList;

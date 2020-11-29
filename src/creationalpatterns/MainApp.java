@@ -1,5 +1,8 @@
 package creationalpatterns;
 
+import creationalpatterns.database.DatabaseState;
+import creationalpatterns.database.Database;
+import creationalpatterns.database.DatabaseHistory;
 import creationalpatterns.users.*;
 
 import java.text.ParseException;
@@ -27,6 +30,11 @@ public class MainApp {
         Task livingRoomCleaning = mom.createTask("Living room cleaning", formatter.parse("2020-11-22"), formatter.parse("2020-11-24"), son);
         livingRoomCleaning.setPlanId(roomCleaning.getId());
 
+        // Save database
+        DatabaseHistory dbh = new DatabaseHistory();
+        DatabaseState dbs = new DatabaseState(Database.getUsers(), Database.getPlans(), Database.getTasks());
+        dbh.setState(dbs);
+
         System.out.println(roomCleaning);
         System.out.println(Database.getTasks());
         System.out.println("=========================");
@@ -37,5 +45,9 @@ public class MainApp {
 
         mom.approveTask(kitchenCleaning.getId());
         System.out.println(dad.getAllTasks());
+
+        // Restore database
+        System.out.println("==========Restored Database===========");
+        System.out.println(dbh.getState(0));
     }
 }
