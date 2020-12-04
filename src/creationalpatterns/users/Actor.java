@@ -1,6 +1,6 @@
 package creationalpatterns.users;
 
-import creationalpatterns.Database;
+import creationalpatterns.database.Database;
 import creationalpatterns.Task;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public class Actor implements User {
     private int id;
     private String userName;
     private String password;
-    private String role;
+    private UserType userType;
 
     private static int idCounter;
 
@@ -19,7 +19,7 @@ public class Actor implements User {
         this.id = idCounter++;
         this.userName = userName;
         this.password = password;
-        role = "ACTOR";
+        this.userType = UserType.ACTOR;
     }
 
     @Override
@@ -32,8 +32,18 @@ public class Actor implements User {
     }
 
     @Override
-    public String getRole() {
-        return role;
+    public String getUserName() {
+        return userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public UserType getUserType() {
+        return userType;
     }
 
     @Override

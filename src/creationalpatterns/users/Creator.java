@@ -1,6 +1,6 @@
 package creationalpatterns.users;
 
-import creationalpatterns.Database;
+import creationalpatterns.database.Database;
 import creationalpatterns.Plan;
 import creationalpatterns.Task;
 
@@ -12,7 +12,7 @@ public class Creator implements User {
     private int id;
     private String userName;
     private String password;
-    private String role;
+    private UserType userType;
 
     private static int idCounter;
 
@@ -20,7 +20,7 @@ public class Creator implements User {
         this.id = idCounter++;
         this.userName = userName;
         this.password = password;
-        role = "CREATOR";
+        this.userType = UserType.CREATOR;
     }
 
     @Override
@@ -29,8 +29,18 @@ public class Creator implements User {
     }
 
     @Override
-    public String getRole() {
-        return role;
+    public String getUserName() {
+        return userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public UserType getUserType() {
+        return userType;
     }
 
     @Override

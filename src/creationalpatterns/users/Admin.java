@@ -1,6 +1,6 @@
 package creationalpatterns.users;
 
-import creationalpatterns.Database;
+import creationalpatterns.database.Database;
 import creationalpatterns.Task;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class Admin implements User {
     private int id;
     private String userName;
     private String password;
-    private String role;
+    private UserType userType;
 
     private static int idCounter;
 
@@ -21,7 +21,7 @@ public class Admin implements User {
         this.userName = userName;
         this.password = password;
         this.userFactory=userFactory;
-        role = "ADMIN";
+        this.userType = UserType.ADMIN;
     }
 
     public static Admin getInstance(String userName, String password, UserFactory userFactory){
@@ -37,8 +37,18 @@ public class Admin implements User {
     }
 
     @Override
-    public String getRole() {
-        return role;
+    public String getUserName() {
+        return userName;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public UserType getUserType() {
+        return userType;
     }
 
     @Override
