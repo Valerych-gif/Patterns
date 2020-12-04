@@ -9,4 +9,6 @@ public interface User extends Cloneable{
     String getUserName();
     String getPassword();
     UserType getUserType();
+    String getRole();
+    String getUserName();
 }

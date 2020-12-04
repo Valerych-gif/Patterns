@@ -51,6 +51,11 @@ public class Admin implements User {
         return userType;
     }
 
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+
     public User createCreator(String userName, String password){
         User creator = userFactory.createUser(userName, password, UserType.CREATOR);
         Database.addUser(creator);

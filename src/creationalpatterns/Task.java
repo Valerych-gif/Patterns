@@ -58,12 +58,16 @@ public class Task {
     }
 
     public void setCompleteness(int completeness) {
-        this.completeness = completeness;
+        this.completeness = Math.min(completeness, 100);
         this.status = Status.IN_PROGRESS;
     }
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public int getPlanId() {
