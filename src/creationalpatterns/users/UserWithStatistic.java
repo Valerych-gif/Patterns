@@ -35,12 +35,17 @@ public class UserWithStatistic extends ImprovedUser {
     }
 
     @Override
-    public String getRole() {
-        return null;
+    public String getUserName() {
+        return user.getUserName();
     }
 
     @Override
-    public String getUserName() {
-        return user.getUserName();
+    public String getPassword() {
+        return user.getPassword();
+    }
+
+    @Override
+    public UserType getUserType() {
+        return user.getUserType();
     }
 }
