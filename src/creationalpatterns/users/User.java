@@ -7,4 +7,5 @@ import java.util.List;
 public interface User {
     List<Task> getAllTasks();
     String getRole();
+    String getUserName();
 }
