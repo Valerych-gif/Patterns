@@ -16,9 +16,11 @@ public class UserDAO extends EntityDAO {
     private static final String USERNAME_COLUMN_NAME = "username";
     private static final String PASSWORD_COLUMN_NAME = "password";
     private static final String USER_TYPE_COLUMN_NAME = "user_type";
+    private List<User> users;
 
     public UserDAO() {
         super();
+        users = new ArrayList<>();
     }
 
     public void insertUser(User user) {
@@ -37,6 +39,10 @@ public class UserDAO extends EntityDAO {
     }
 
     public User getUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUserName().equals(username))
+                return user;
+        }
         User user = null;
         String sql = "SELECT * FROM `" + USER_TABLE_NAME + "` WHERE `" + USERNAME_COLUMN_NAME + "`='" + username + "'";
         try (Statement statement = connection.createStatement()) {
@@ -45,6 +51,7 @@ public class UserDAO extends EntityDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        users.add(user);
         return user;
     }
 
@@ -104,6 +111,10 @@ public class UserDAO extends EntityDAO {
     }
 
     public User getUserById(long id) {
+        for (User user : users) {
+            if (user.getId().equals(id))
+                return user;
+        }
         User user = null;
         String sql = "SELECT * FROM `" + USER_TABLE_NAME + "` WHERE `" + ID_COLUMN_NAME + "`='" + id + "'";
         try (Statement statement = connection.createStatement()) {
@@ -112,6 +123,7 @@ public class UserDAO extends EntityDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        users.add(user);
         return user;
     }
 }
