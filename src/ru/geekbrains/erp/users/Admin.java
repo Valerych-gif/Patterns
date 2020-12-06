@@ -1,32 +1,41 @@
-package creationalpatterns.users;
+package ru.geekbrains.erp.users;
 
-import creationalpatterns.database.Database;
-import creationalpatterns.Task;
+import ru.geekbrains.erp.DAO.UserDAO;
+import ru.geekbrains.erp.Task;
 
 import java.util.List;
 
 public class Admin implements User {
 
     private static Admin instance;
-    private UserFactory userFactory;
-    private int id;
-    private String userName;
-    private String password;
-    private UserType userType;
+    private final UserFactory userFactory;
+    private final long id;
+    private final String userName;
+    private final String password;
+    private final UserType userType;
 
-    private static int idCounter;
+    private final UserDAO userDAO;
 
-    private Admin(String userName, String password, UserFactory userFactory) {
-        this.id = idCounter++;
-        this.userName = userName;
-        this.password = password;
-        this.userFactory=userFactory;
+    private Admin(User user) {
+        this.userDAO = new UserDAO();
         this.userType = UserType.ADMIN;
+        this.userFactory = new UserFactoryImpl();
+
+        this.id = user.getId();
+        this.userName = user.getUserName();
+        this.password = user.getPassword();
     }
 
-    public static Admin getInstance(String userName, String password, UserFactory userFactory){
+    public static Admin getInstance(){
         if (instance == null){
-            instance = new Admin(userName, password, userFactory);
+            instance = (Admin) new UserDAO().getAllUsersByUserType(UserType.ADMIN).get(0);
+        }
+        return instance;
+    }
+
+    public static Admin getInstance(User user) {
+        if (instance == null){
+            instance = new Admin(user);
         }
         return instance;
     }
@@ -34,6 +43,11 @@ public class Admin implements User {
     @Override
     public List<Task> getAllTasks() {
         return null;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
     }
 
     @Override
@@ -53,13 +67,13 @@ public class Admin implements User {
 
     public User createCreator(String userName, String password){
         User creator = userFactory.createUser(userName, password, UserType.CREATOR);
-        Database.addUser(creator);
+        userDAO.insertUser(creator);
         return creator;
     }
 
     public User createActor(String userName, String password){
         User actor = userFactory.createUser(userName, password, UserType.ACTOR);
-        Database.addUser(actor);
+        userDAO.insertUser(actor);
         return actor;
     }
 

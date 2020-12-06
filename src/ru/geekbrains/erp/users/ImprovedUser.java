@@ -1,4 +1,4 @@
-package creationalpatterns.users;
+package ru.geekbrains.erp.users;
 
 public abstract class ImprovedUser implements User{
     User user;

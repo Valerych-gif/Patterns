@@ -1,26 +1,39 @@
-package creationalpatterns;
+package ru.geekbrains.erp;
 
 public class Plan {
 
     public enum Status{
-        NEW,
-        IN_PROGRESS,
-        FINISHED,
-        APPROVED
+        NEW("new"),
+        IN_PROGRESS("in progress"),
+        FINISHED("finished"),
+        APPROVED("approved");
+
+        String statusName;
+
+        Status(String statusName) {
+            this.statusName = statusName;
+        }
+
+        public String getStatusName() {
+            return statusName;
+        }
     }
 
-    private final int id;
-    private static int idCounter;
+    private long id;
     private final String title;
     private Status status;
 
     public Plan(String title) {
         this.title = title;
-        this.id = idCounter++;
         status = Status.NEW;
     }
 
-    public int getId() {
+    public Plan(long id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    public long getId() {
         return id;
     }
 

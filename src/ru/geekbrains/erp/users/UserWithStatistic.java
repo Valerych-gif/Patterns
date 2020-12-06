@@ -1,6 +1,6 @@
-package creationalpatterns.users;
+package ru.geekbrains.erp.users;
 
-import creationalpatterns.Task;
+import ru.geekbrains.erp.Task;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,6 +32,11 @@ public class UserWithStatistic extends ImprovedUser {
         return tasks.stream()
                 .filter(task -> task.getStatus().equals(status))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long getId() {
+        return user.getId();
     }
 
     @Override
