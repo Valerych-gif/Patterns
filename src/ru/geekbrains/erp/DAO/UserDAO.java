@@ -16,7 +16,7 @@ public class UserDAO extends EntityDAO {
     private static final String USERNAME_COLUMN_NAME = "username";
     private static final String PASSWORD_COLUMN_NAME = "password";
     private static final String USER_TYPE_COLUMN_NAME = "user_type";
-    private List<User> users;
+    private final List<User> users;
 
     public UserDAO() {
         super();
@@ -60,21 +60,27 @@ public class UserDAO extends EntityDAO {
         UserFactory userFactory = new UserFactoryImpl();
         if (rs.next()) {
             String userTypeName = rs.getString(USER_TYPE_COLUMN_NAME);
-            user = switch (userTypeName) {
-                case "admin" -> Admin.getInstance();
-                case "creator" -> userFactory.getUser(
+            switch (userTypeName) {
+                case "admin":
+                    user = Admin.getInstance();
+                    break;
+                case "creator":
+                    user = userFactory.getUser(
                         rs.getLong(ID_COLUMN_NAME),
                         rs.getString(USERNAME_COLUMN_NAME),
                         rs.getString(PASSWORD_COLUMN_NAME),
                         UserType.CREATOR);
-                case "actor" -> userFactory.getUser(
+                    break;
+                case "actor":
+                    user = userFactory.getUser(
                         rs.getLong(ID_COLUMN_NAME),
                         rs.getString(USERNAME_COLUMN_NAME),
                         rs.getString(PASSWORD_COLUMN_NAME),
-                        UserType.ACTOR
-                );
-                default -> throw new TypeNotPresentException(userTypeName, new Throwable());
-            };
+                        UserType.ACTOR);
+                    break;
+                default:
+                    throw new TypeNotPresentException(userTypeName, new Throwable());
+            }
         }
         return user;
     }
