@@ -4,8 +4,6 @@ import ru.geekbrains.erp.DAO.TaskDAO;
 import ru.geekbrains.erp.DAO.UserDAO;
 import ru.geekbrains.erp.users.User;
 
-import java.util.Date;
-
 public class Task {
 
     public enum Status{
@@ -64,7 +62,7 @@ public class Task {
         UserDAO userDAO = new UserDAO();
         this.actor = userDAO.getUserById(actorId);
         this.completeness = completeness;
-        for (Task.Status s : Task.Status.values()) {
+        for (Status s : Status.values()) {
             if (s.getStatusName().equals(status)){
                 this.status = s;
                 break;

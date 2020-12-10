@@ -1,10 +1,6 @@
 package ru.geekbrains.erp.DAO;
 
-import ru.geekbrains.erp.Plan;
 import ru.geekbrains.erp.Task;
-import ru.geekbrains.erp.users.User;
-import ru.geekbrains.erp.users.UserFactory;
-import ru.geekbrains.erp.users.UserFactoryImpl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

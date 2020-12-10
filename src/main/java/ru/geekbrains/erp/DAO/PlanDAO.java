@@ -1,7 +1,6 @@
 package ru.geekbrains.erp.DAO;
 
 import ru.geekbrains.erp.Plan;
-import ru.geekbrains.erp.Task;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -85,6 +85,23 @@ public class UserDAO extends EntityDAO {
         return user;
     }
 
+    public User getUserByLoginAndPassword(String username, String password) {
+        for (User user : users) {
+            if (user.getUserName().equals(username))
+                return user;
+        }
+        User user = null;
+        String sql = "SELECT * FROM `" + USER_TABLE_NAME + "` WHERE `" + USERNAME_COLUMN_NAME + "`='" + username + "' AND `" + PASSWORD_COLUMN_NAME + "`='" + password +"'";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(sql);
+            user = getUserFromRS(rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        users.add(user);
+        return user;
+    }
+
     public List<User> getAllUsersByUserType(UserType userType) {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM `" + USER_TABLE_NAME + "` WHERE `" + USER_TYPE_COLUMN_NAME + "`='" + userType.getUserTypeName() + "';";

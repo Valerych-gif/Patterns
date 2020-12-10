@@ -5,7 +5,6 @@ import ru.geekbrains.erp.DAO.TaskDAO;
 import ru.geekbrains.erp.Plan;
 import ru.geekbrains.erp.Task;
 
-import java.util.Date;
 import java.util.List;
 
 public class Creator implements User {
